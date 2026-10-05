@@ -68,7 +68,8 @@ function rule(check) {
         const value = source.value.replace(/\?.*$/, '')
         if (!value || !value.startsWith('.') || value.endsWith('.js')) return
 
-        check(context, node, resolve(dirname(context.getFilename()), value))
+        const filename = context.getFilename ? context.getFilename() : context.filename
+        check(context, node, resolve(dirname(filename), value))
       }
 
       return {
